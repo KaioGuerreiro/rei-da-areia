@@ -3,6 +3,9 @@
 [ext_resource type="TileSet" uid="uid://bcyknv3alg7ec" path="res://tilesets/praia.tres" id="1_b7aib"]
 [ext_resource type="PackedScene" uid="uid://b8wtwst3knwny" path="res://entities/player.tscn" id="2_0wgak"]
 [ext_resource type="PackedScene" uid="uid://cp5741m2urt7x" path="res://scenes/camera.tscn" id="3_cam"]
+[ext_resource type="PackedScene" uid="uid://dfy54j1u821am" path="res://scenes/hud.tscn" id="4_hud"]
+[ext_resource type="PackedScene" uid="uid://cx8g4y6j4n1ab" path="res://entities/crab.tscn" id="5_crab"]
+[ext_resource type="Script" uid="uid://fts2jhpjusou" path="res://scripts/game_manager.gd" id="6_mgr"]
 
 [node name="Cena" type="Node2D" unique_id=1932193931]
 metadata/_edit_horizontal_guides_ = [360.0]
@@ -26,3 +29,31 @@ limit_left = 0
 limit_top = 0
 limit_right = 720
 limit_bottom = 720
+
+[node name="HUD" parent="." unique_id=321125854 instance=ExtResource("4_hud")]
+
+[node name="GameManager" type="Node" parent="." unique_id=1111854120 node_paths=PackedStringArray("player", "hud")]
+script = ExtResource("6_mgr")
+player = NodePath("../Player")
+hud = NodePath("../HUD")
+
+[node name="Enemies" type="Node2D" parent="." unique_id=2083740881]
+
+[node name="Crab1" parent="Enemies" unique_id=1535088384 instance=ExtResource("5_crab")]
+position = Vector2(250, 240)
+
+[node name="Crab2" parent="Enemies" unique_id=487141704 instance=ExtResource("5_crab")]
+position = Vector2(470, 240)
+
+[node name="Crab3" parent="Enemies" unique_id=432041942 instance=ExtResource("5_crab")]
+position = Vector2(220, 380)
+
+[node name="Crab4" parent="Enemies" unique_id=783898239 instance=ExtResource("5_crab")]
+position = Vector2(500, 380)
+
+[node name="Crab5" parent="Enemies" unique_id=923979604 instance=ExtResource("5_crab")]
+position = Vector2(300, 470)
+
+[node name="KingCrab" parent="Enemies" unique_id=230481845 instance=ExtResource("5_crab")]
+position = Vector2(420, 470)
+is_king_crab = true

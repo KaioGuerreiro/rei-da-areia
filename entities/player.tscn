@@ -349,6 +349,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_attack"]
+radius = 12.0
+
 [node name="Player" type="CharacterBody2D" unique_id=1970172899 groups=["player"]]
 script = ExtResource("1_player")
 
@@ -361,3 +364,10 @@ animation = &"idle_frente"
 autoplay = "idle_frente"
 frame = 3
 frame_progress = 0.6958313
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=1849204712]
+position = Vector2(0, 12)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=1849204713]
+shape = SubResource("CircleShape2D_attack")
