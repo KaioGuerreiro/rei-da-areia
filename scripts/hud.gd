@@ -35,9 +35,9 @@ func update_health(current: int, max_val: int) -> void:
 func update_enemies_remaining(remaining: int, total: int) -> void:
 	if enemies_label:
 		if remaining > 0:
-			enemies_label.text = "🦀 Caranguejos: %d / %d" % [remaining, total]
+			enemies_label.text = "Caranguejos: %d / %d" % [remaining, total]
 		else:
-			enemies_label.text = "👑 Arena Conquistada!"
+			enemies_label.text = "Arena limpa!"
 
 
 func show_victory() -> void:

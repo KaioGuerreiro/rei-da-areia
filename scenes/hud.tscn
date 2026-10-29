@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dfy54j1u821am"]
 
-[ext_resource type="Script" path="res://scripts/hud.gd" id="1_hud"]
+[ext_resource type="Script" uid="uid://f5jhodwclfjh" path="res://scripts/hud.gd" id="1_hud"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp_bg"]
 bg_color = Color(0.12, 0.12, 0.12, 0.8)
@@ -48,10 +48,10 @@ expand_margin_top = 20.0
 expand_margin_right = 20.0
 expand_margin_bottom = 20.0
 
-[node name="HUD" type="CanvasLayer"]
+[node name="HUD" type="CanvasLayer" unique_id=189643768]
 script = ExtResource("1_hud")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1985077398]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 50.0
@@ -61,15 +61,15 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 16
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1825410108]
 layout_mode = 2
 alignment = 1
 
-[node name="HPTitle" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="HPTitle" type="Label" parent="MarginContainer/HBoxContainer" unique_id=1216454689]
 layout_mode = 2
 text = "VIDA: "
 
-[node name="HealthBar" type="ProgressBar" parent="MarginContainer/HBoxContainer"]
+[node name="HealthBar" type="ProgressBar" parent="MarginContainer/HBoxContainer" unique_id=505597550]
 custom_minimum_size = Vector2(160, 22)
 layout_mode = 2
 size_flags_vertical = 4
@@ -78,7 +78,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_hp_fill")
 value = 100.0
 show_percentage = false
 
-[node name="HPLabel" type="Label" parent="MarginContainer/HBoxContainer/HealthBar"]
+[node name="HPLabel" type="Label" parent="MarginContainer/HBoxContainer/HealthBar" unique_id=152548822]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -89,16 +89,16 @@ text = "100 / 100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Spacer" type="Control" parent="MarginContainer/HBoxContainer"]
+[node name="Spacer" type="Control" parent="MarginContainer/HBoxContainer" unique_id=968165938]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="EnemiesLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="EnemiesLabel" type="Label" parent="MarginContainer/HBoxContainer" unique_id=1758427063]
 layout_mode = 2
-text = "🦀 Caranguejos: 0 / 0"
+text = "Caranguejos: 0 / 0"
 horizontal_alignment = 2
 
-[node name="VictoryPanel" type="Control" parent="."]
+[node name="VictoryPanel" type="Control" parent="." unique_id=2118872529]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -107,7 +107,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="VictoryPanel"]
+[node name="ColorRect" type="ColorRect" parent="VictoryPanel" unique_id=853602491]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -116,7 +116,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.6)
 
-[node name="CenterContainer" type="CenterContainer" parent="VictoryPanel"]
+[node name="CenterContainer" type="CenterContainer" parent="VictoryPanel" unique_id=195185835]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -124,32 +124,32 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="PanelContainer" parent="VictoryPanel/CenterContainer"]
+[node name="Panel" type="PanelContainer" parent="VictoryPanel/CenterContainer" unique_id=667601785]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VictoryPanel/CenterContainer/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VictoryPanel/CenterContainer/Panel" unique_id=2100689398]
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="Title" type="Label" parent="VictoryPanel/CenterContainer/Panel/VBoxContainer"]
+[node name="Title" type="Label" parent="VictoryPanel/CenterContainer/Panel/VBoxContainer" unique_id=1523091519]
 layout_mode = 2
-text = "👑 VITÓRIA! 👑"
+text = "VITÓRIA!"
 horizontal_alignment = 1
 
-[node name="Subtitle" type="Label" parent="VictoryPanel/CenterContainer/Panel/VBoxContainer"]
+[node name="Subtitle" type="Label" parent="VictoryPanel/CenterContainer/Panel/VBoxContainer" unique_id=139349564]
 layout_mode = 2
-text = "Você derrotou todos os caranguejos!
+text = "Você derrotou todos os 50 caranguejos!
 Agora você é o verdadeiro Rei da Areia!"
 horizontal_alignment = 1
 
-[node name="RestartButton" type="Button" parent="VictoryPanel/CenterContainer/Panel/VBoxContainer"]
+[node name="RestartButton" type="Button" parent="VictoryPanel/CenterContainer/Panel/VBoxContainer" unique_id=47041292]
 custom_minimum_size = Vector2(160, 36)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Jogar Novamente"
 
-[node name="GameOverPanel" type="Control" parent="."]
+[node name="GameOverPanel" type="Control" parent="." unique_id=1392023695]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -158,7 +158,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="GameOverPanel"]
+[node name="ColorRect" type="ColorRect" parent="GameOverPanel" unique_id=2119106367]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -167,7 +167,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.18, 0, 0, 0.7)
 
-[node name="CenterContainer" type="CenterContainer" parent="GameOverPanel"]
+[node name="CenterContainer" type="CenterContainer" parent="GameOverPanel" unique_id=725456268]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -175,25 +175,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="PanelContainer" parent="GameOverPanel/CenterContainer"]
+[node name="Panel" type="PanelContainer" parent="GameOverPanel/CenterContainer" unique_id=330503852]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel_defeat")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GameOverPanel/CenterContainer/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverPanel/CenterContainer/Panel" unique_id=986956431]
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="Title" type="Label" parent="GameOverPanel/CenterContainer/Panel/VBoxContainer"]
+[node name="Title" type="Label" parent="GameOverPanel/CenterContainer/Panel/VBoxContainer" unique_id=1283945721]
 layout_mode = 2
-text = "💀 DERROTA 💀"
+text = "DERROTA"
 horizontal_alignment = 1
 
-[node name="Subtitle" type="Label" parent="GameOverPanel/CenterContainer/Panel/VBoxContainer"]
+[node name="Subtitle" type="Label" parent="GameOverPanel/CenterContainer/Panel/VBoxContainer" unique_id=2091885837]
 layout_mode = 2
 text = "Você foi derrotado pelas criaturas da areia..."
 horizontal_alignment = 1
 
-[node name="RestartButton" type="Button" parent="GameOverPanel/CenterContainer/Panel/VBoxContainer"]
+[node name="RestartButton" type="Button" parent="GameOverPanel/CenterContainer/Panel/VBoxContainer" unique_id=1664466958]
 custom_minimum_size = Vector2(160, 36)
 layout_mode = 2
 size_flags_horizontal = 4

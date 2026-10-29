@@ -34,6 +34,7 @@ signal died
 ## Referências aos Nós Filhos
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_area: Area2D = $AttackArea
+@onready var golpe: ColorRect = $AttackArea/Golpe if has_node("AttackArea/Golpe") else null
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
 ## Estados e Direções
@@ -148,6 +149,14 @@ func _start_attack() -> void:
 
 	# Limpa lista de inimigos atingidos neste golpe
 	_hit_enemies.clear()
+
+	# Efeito visual de clarão do golpe (conforme Aula 10)
+	if golpe:
+		golpe.visible = true
+		get_tree().create_timer(0.1).timeout.connect(func() -> void:
+			if is_instance_valid(golpe):
+				golpe.visible = false
+		)
 
 	# Imediatamente checa quaisquer inimigos que já estejam dentro da área de ataque
 	if attack_area:
@@ -334,6 +343,8 @@ func _is_run_pressed() -> bool:
 
 
 func _is_attack_pressed() -> bool:
+	if InputMap.has_action("atacar") and Input.is_action_just_pressed("atacar"):
+		return true
 	if InputMap.has_action("attack") and Input.is_action_just_pressed("attack"):
 		return true
 	if InputMap.has_action("ui_accept") and Input.is_action_just_pressed("ui_accept"):

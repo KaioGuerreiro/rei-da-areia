@@ -20,6 +20,7 @@ signal health_changed(current: int, max_val: int)
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var hit_area: Area2D = $HitArea
+@onready var navigation_agent: NavigationAgent2D = get_node_or_null("NavigationAgent2D")
 
 enum State { IDLE, CHASE, ATTACK, HURT, DEAD }
 var current_state: State = State.IDLE
@@ -28,6 +29,7 @@ var current_health: int
 var player_target: Node2D = null
 var _attack_timer: float = 0.0
 var _hurt_timer: float = 0.0
+var _nav_update_timer: float = 0.0
 
 
 func _ready() -> void:
@@ -96,10 +98,23 @@ func _physics_process(delta: float) -> void:
 				_start_attack(dir_to_player)
 				return
 
-			# Persegue o jogador
-			velocity = velocity.move_toward(dir_to_player * move_speed, acceleration * delta)
+			# Calcula direção de navegação contornando obstáculos com NavigationAgent2D (Aula 10)
+			var move_dir: Vector2 = dir_to_player
+			if navigation_agent:
+				_nav_update_timer -= delta
+				if _nav_update_timer <= 0.0:
+					_nav_update_timer = 0.2 # Otimização: recalcula rota 5x por segundo
+					navigation_agent.target_position = player_target.global_position
+				
+				var next_path_pos: Vector2 = navigation_agent.get_next_path_position()
+				var nav_dir: Vector2 = global_position.direction_to(next_path_pos)
+				if nav_dir != Vector2.ZERO:
+					move_dir = nav_dir
+
+			# Persegue o jogador seguindo a rota calculada
+			velocity = velocity.move_toward(move_dir * move_speed, acceleration * delta)
 			move_and_slide()
-			_update_facing(dir_to_player)
+			_update_facing(move_dir)
 			_play_anim("walk")
 
 		State.ATTACK:

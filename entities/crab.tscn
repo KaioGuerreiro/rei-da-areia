@@ -1,46 +1,11 @@
 [gd_scene format=3 uid="uid://cx8g4y6j4n1ab"]
 
-[ext_resource type="Script" path="res://scripts/crab.gd" id="1_crab"]
+[ext_resource type="Script" uid="uid://shwphpwrans4" path="res://scripts/crab.gd" id="1_crab"]
 [ext_resource type="Texture2D" uid="uid://cj751iccebcdg" path="res://sprites/crab/Crab Sprite Sheet.png" id="2_sheet"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_body"]
 radius = 6.0
 height = 16.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_hit"]
-radius = 10.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_idle_0"]
-atlas = ExtResource("2_sheet")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_idle_1"]
-atlas = ExtResource("2_sheet")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_idle_2"]
-atlas = ExtResource("2_sheet")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_idle_3"]
-atlas = ExtResource("2_sheet")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_walk_0"]
-atlas = ExtResource("2_sheet")
-region = Rect2(0, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_walk_1"]
-atlas = ExtResource("2_sheet")
-region = Rect2(32, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_walk_2"]
-atlas = ExtResource("2_sheet")
-region = Rect2(64, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_walk_3"]
-atlas = ExtResource("2_sheet")
-region = Rect2(96, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_atk_0"]
 atlas = ExtResource("2_sheet")
@@ -73,6 +38,38 @@ region = Rect2(64, 96, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_hurt_3"]
 atlas = ExtResource("2_sheet")
 region = Rect2(96, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle_0"]
+atlas = ExtResource("2_sheet")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle_1"]
+atlas = ExtResource("2_sheet")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle_2"]
+atlas = ExtResource("2_sheet")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle_3"]
+atlas = ExtResource("2_sheet")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_walk_0"]
+atlas = ExtResource("2_sheet")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_walk_1"]
+atlas = ExtResource("2_sheet")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_walk_2"]
+atlas = ExtResource("2_sheet")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_walk_3"]
+atlas = ExtResource("2_sheet")
+region = Rect2(96, 32, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_crab"]
 animations = [{
@@ -159,21 +156,36 @@ animations = [{
 "speed": 6.0
 }]
 
-[node name="Crab" type="CharacterBody2D" groups=["enemies"]]
-script = ExtResource("1_crab")
+[sub_resource type="CircleShape2D" id="CircleShape2D_hit"]
+radius = 9.055386
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4)
+[node name="Crab" type="CharacterBody2D" unique_id=1991456 groups=["enemies"]]
+collision_layer = 4
+collision_mask = 5
+motion_mode = 1
+script = ExtResource("1_crab")
+attack_range = 15.0
+acceleration = 200.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1369519198]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_body")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1895959085]
 sprite_frames = SubResource("SpriteFrames_crab")
 animation = &"idle"
 autoplay = "idle"
+offset = Vector2(0, -12)
 
-[node name="HitArea" type="Area2D" parent="."]
+[node name="HitArea" type="Area2D" parent="." unique_id=574444957]
 position = Vector2(0, 4)
+collision_layer = 0
+collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea" unique_id=1973391938]
+position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_hit")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1973391939]
+path_desired_distance = 4.0
+target_desired_distance = 4.0
