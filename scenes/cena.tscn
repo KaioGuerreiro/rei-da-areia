@@ -41,6 +41,29 @@ script = ExtResource("6_mgr")
 player = NodePath("../Player")
 hud = NodePath("../HUD")
 
+[node name="Nascedouros" type="Node2D" parent="." unique_id=9990002]
+
+[node name="Cima" type="Marker2D" parent="Nascedouros" unique_id=9990003]
+position = Vector2(360, 48)
+
+[node name="Baixo" type="Marker2D" parent="Nascedouros" unique_id=9990004]
+position = Vector2(360, 672)
+
+[node name="Esquerda" type="Marker2D" parent="Nascedouros" unique_id=9990005]
+position = Vector2(48, 360)
+
+[node name="Direita" type="Marker2D" parent="Nascedouros" unique_id=9990006]
+position = Vector2(672, 360)
+
+[node name="Horda" type="Timer" parent="." unique_id=9990007]
+wait_time = 3.0
+autostart = true
+
+[node name="Relogio" type="Timer" parent="." unique_id=9990008]
+wait_time = 60.0
+one_shot = true
+autostart = true
+
 [node name="Enemies" type="Node2D" parent="." unique_id=2083740881]
 
 [node name="Crab1" parent="Enemies" unique_id=1535088384 instance=ExtResource("5_crab")]
