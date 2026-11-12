@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rei da Areia - Jogo de Horda 2D</title>
+    <style>
+        :root {
+            --bg-color: #1a1e24;
+            --card-bg: #242b35;
+            --accent-sand: #e6c280;
+            --accent-sea: #3ba4c7;
+            --accent-coral: #e06050;
+            --text-color: #e2e8f0;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 12px;
+            border: 1px solid rgba(230, 194, 128, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            color: var(--accent-sand);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+        }
+
+        header p.tagline {
+            font-size: 1.2rem;
+            color: var(--accent-sea);
+            font-weight: 500;
+        }
+
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background-color: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.8rem;
+            margin-bottom: 1.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h2 {
+            color: var(--accent-sand);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid rgba(230, 194, 128, 0.2);
+            padding-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .carta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .carta-item {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 1.2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-sand);
+        }
+
+        .carta-item.tipo {
+            border-left-color: var(--accent-coral);
+        }
+
+        .carta-item.modo {
+            border-left-color: var(--accent-sea);
+        }
+
+        .carta-item h3 {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 0.3rem;
+        }
+
+        .carta-item p {
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .controls-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.8rem;
+        }
+
+        .controls-table th, .controls-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .controls-table th {
+            color: var(--accent-sand);
+            font-weight: 600;
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        kbd {
+            background: #334155;
+            border: 1px solid #475569;
+            border-radius: 4px;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.85rem;
+            box-shadow: 0 2px 0 rgba(0,0,0,0.4);
+            font-family: monospace;
+        }
+
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #e6c280 0%, #d4a359 100%);
+            color: #0f172a;
+            padding: 0.85rem 1.6rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            margin-top: 1rem;
+            margin-right: 0.8rem;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(230, 194, 128, 0.35);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.18);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        ul {
+            list-style-position: inside;
+            margin-top: 0.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🦀 Rei da Areia</h1>
+            <p class="tagline">Jogo de Horda 2D no Litoral — Jogos Digitais II (2026/2)</p>
+            <div class="badges">
+                <span class="badge">Godot Engine 4</span>
+                <span class="badge">Modo Horda</span>
+                <span class="badge">Tipo: Chefe</span>
+                <span class="badge">Tag: aula-12</span>
+            </div>
+        </header>
+
+        <section class="card">
+            <h2>📜 A Carta do Jogo</h2>
+            <p>Conforme definido nas diretrizes da disciplina:</p>
+            <div class="carta-grid">
+                <div class="carta-item">
+                    <h3>Tema (Sorteado)</h3>
+                    <p>Praia & Caranguejos</p>
+                </div>
+                <div class="carta-item tipo">
+                    <h3>Tipo de Jogo</h3>
+                    <p>Chefe (Rei da Areia)</p>
+                </div>
+                <div class="carta-item modo">
+                    <h3>Modo de Jogo</h3>
+                    <p>Horda (Arena Vista de Cima)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>🎮 Como Jogar</h2>
+            <p>Sobreviva à maré de caranguejos que emergem pelas bordas da praia. Desvie de pedras, coqueiros e da água enquanto desfere golpes certeiros para defender a arena. Quando o temível <strong>Rei da Areia</strong> surgir, derrote-o para conquistar a vitória!</p>
+            
+            <table class="controls-table">
+                <thead>
+                    <tr>
+                        <th>Ação</th>
+                        <th>Comando</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mover Personagem</td>
+                        <td><kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> ou <kbd>←</kbd> <kbd>↑</kbd> <kbd>→</kbd> <kbd>↓</kbd></td>
+                    </tr>
+                    <tr>
+                        <td>Correr</td>
+                        <td>Segurar <kbd>Shift</kbd></td>
+                    </tr>
+                    <tr>
+                        <td>Atacar</td>
+                        <td><kbd>Espaço</kbd>, <kbd>J</kbd> ou <kbd>Botão Esquerdo do Mouse</kbd></td>
+                    </tr>
+                    <tr>
+                        <td>Jogar Novamente</td>
+                        <td><kbd>Enter</kbd> ou Botão no Painel</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="card">
+            <h2>📦 Pacotes de Execução (Builds)</h2>
+            <p>O jogo foi compilado e empacotado para execução fora do editor Godot (Aula 12 - 11/11):</p>
+            <div>
+                <a href="../builds/windows/rei-da-areia.pck" class="btn-download" download>💾 Baixar Pacote Windows (.pck)</a>
+                <a href="../builds/web/rei-da-areia.pck" class="btn-download btn-secondary" download>🌐 Baixar Pacote Web (.pck)</a>
+            </div>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">
+                Para rodar localmente no Windows: utilize o binário da Godot com o argumento <code>--main-pack builds/windows/rei-da-areia.pck</code>.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>📚 Créditos e Atribuições</h2>
+            <ul>
+                <li><strong>Engine:</strong> <a href="https://godotengine.org/" target="_blank" style="color: var(--accent-sea);">Godot Engine 4</a> (Licença MIT).</li>
+                <li><strong>Sprites de Inimigos:</strong> <em>Crab Sprite Sheet</em> (Animações de Idle, Walk, Attack, Hurt e Death).</li>
+                <li><strong>Sprites do Personagem:</strong> <em>Character Sheet 16x16</em> (Movimentação e ataque em 4 direções).</li>
+                <li><strong>Cenário:</strong> <em>Tileset Praia</em> (Areia, Mar, Rochas e Coqueiros).</li>
+                <li><strong>Disciplina:</strong> Jogos Digitais II — 2º bimestre 2026/2 — Prof. Ezéfferth C. A. Fernandes (UNIGRAN).</li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>Projeto acadêmico — Desenvolvido por Kaio Guerreiro</p>
+            <p>Repositório com versionamento incremental de aulas: <code>aula-08</code>, <code>aula-09</code>, <code>aula-10</code>, <code>aula-11</code>, <code>aula-12</code>.</p>
+        </footer>
+    </div>
+</body>
+</html>
