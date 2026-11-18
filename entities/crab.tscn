@@ -156,9 +156,6 @@ animations = [{
 "speed": 6.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_hit"]
-radius = 9.055386
-
 [node name="Crab" type="CharacterBody2D" unique_id=1991456 groups=["enemies"]]
 collision_layer = 4
 collision_mask = 5
@@ -176,15 +173,6 @@ sprite_frames = SubResource("SpriteFrames_crab")
 animation = &"idle"
 autoplay = "idle"
 offset = Vector2(0, -12)
-
-[node name="HitArea" type="Area2D" parent="." unique_id=574444957]
-position = Vector2(0, 4)
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea" unique_id=1973391938]
-position = Vector2(0, -4)
-shape = SubResource("CircleShape2D_hit")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1973391939]
 path_desired_distance = 4.0
