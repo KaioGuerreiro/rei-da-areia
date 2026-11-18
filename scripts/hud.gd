@@ -1,57 +1,42 @@
 class_name HUD
 extends CanvasLayer
 
-signal restart_requested
-
 @onready var hp_bar: ProgressBar = $MarginContainer/HBoxContainer/HealthBar
 @onready var hp_label: Label = $MarginContainer/HBoxContainer/HealthBar/HPLabel
-@onready var enemies_label: Label = $MarginContainer/HBoxContainer/EnemiesLabel
+@onready var kills_label: Label = $MarginContainer/HBoxContainer/KillsLabel
 
-@onready var victory_panel: Control = $VictoryPanel
-@onready var victory_restart_btn: Button = $VictoryPanel/CenterContainer/Panel/VBoxContainer/RestartButton
-
-@onready var game_over_panel: Control = $GameOverPanel
-@onready var game_over_restart_btn: Button = $GameOverPanel/CenterContainer/Panel/VBoxContainer/RestartButton
+@onready var end_panel: Control = $EndPanel
+@onready var end_title: Label = $EndPanel/CenterContainer/Panel/VBoxContainer/Title
+@onready var end_subtitle: Label = $EndPanel/CenterContainer/Panel/VBoxContainer/Subtitle
+@onready var restart_btn: Button = $EndPanel/CenterContainer/Panel/VBoxContainer/RestartButton
 
 
 func _ready() -> void:
-	victory_panel.visible = false
-	game_over_panel.visible = false
-
-	if victory_restart_btn:
-		victory_restart_btn.pressed.connect(_on_restart_pressed)
-	if game_over_restart_btn:
-		game_over_restart_btn.pressed.connect(_on_restart_pressed)
+	end_panel.visible = false
+	restart_btn.pressed.connect(func(): get_tree().reload_current_scene())
 
 
 func update_health(current: int, max_val: int) -> void:
-	if hp_bar:
-		hp_bar.max_value = max_val
-		hp_bar.value = current
-	if hp_label:
-		hp_label.text = "%d / %d" % [current, max_val]
+	hp_bar.max_value = max_val
+	hp_bar.value = current
+	hp_label.text = "%d / %d" % [current, max_val]
 
 
-func update_enemies_remaining(remaining: int, total: int) -> void:
-	if enemies_label:
-		if remaining > 0:
-			enemies_label.text = "Caranguejos: %d / %d" % [remaining, total]
-		else:
-			enemies_label.text = "Arena limpa!"
+func update_kills(kills: int, target: int = 50) -> void:
+	kills_label.text = "Abatidos: %d / %d" % [kills, target]
 
 
 func show_victory() -> void:
-	victory_panel.visible = true
-	if victory_restart_btn:
-		victory_restart_btn.grab_focus()
+	_show_end("VITÓRIA!", "Você derrotou todos os 50 caranguejos!\n", "Jogar Novamente")
 
 
 func show_game_over() -> void:
-	game_over_panel.visible = true
-	if game_over_restart_btn:
-		game_over_restart_btn.grab_focus()
+	_show_end("DERROTA", "Você foi derrotado pelas criaturas da areia...\n", "Tentar Novamente")
 
 
-func _on_restart_pressed() -> void:
-	restart_requested.emit()
-	get_tree().reload_current_scene()
+func _show_end(title: String, subtitle: String, button_text: String) -> void:
+	end_title.text = title
+	end_subtitle.text = subtitle
+	restart_btn.text = button_text
+	end_panel.visible = true
+	restart_btn.grab_focus()
