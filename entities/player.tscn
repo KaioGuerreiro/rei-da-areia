@@ -350,12 +350,13 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_attack"]
-radius = 12.0
+radius = 20.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1970172899 groups=["player"]]
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_player")
+attack_damage = 1000
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=885682265]
 shape = SubResource("CapsuleShape2D_5nw8c")
@@ -368,7 +369,6 @@ frame = 3
 frame_progress = 0.6958313
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=1849204712]
-position = Vector2(0, 6)
 collision_layer = 0
 collision_mask = 4
 monitorable = false
@@ -379,7 +379,7 @@ shape = SubResource("CircleShape2D_attack")
 [node name="Golpe" type="ColorRect" parent="AttackArea" unique_id=1849204714]
 visible = false
 offset_left = -20.0
-offset_top = -18.0
+offset_top = -20.0
 offset_right = 20.0
-offset_bottom = 22.0
+offset_bottom = 20.0
 color = Color(1, 1, 1, 0.352941)
