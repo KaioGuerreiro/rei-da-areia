@@ -3,7 +3,8 @@
 > Projeto semestral desenvolvido para a disciplina de **Jogos Digitais II** (2º bimestre de 2026/2)  
 > **Instituição:** Centro Universitário da Grande Dourados (UNIGRAN)  
 > **Professor:** Ezéfferth C. A. Fernandes  
-> **Autor:** Kaio Guerreiro
+> **Autor:** Kaio Guerreiro  
+> **Jogue Online:** [https://kaioguerreiro.itch.io/rei-da-areia](https://kaioguerreiro.itch.io/rei-da-areia)
 
 ---
 
@@ -13,15 +14,15 @@ Conforme os sorteios e definições estabelecidos no documento do projeto:
 
 | Elemento | Definição | Descrição no Projeto |
 | :--- | :--- | :--- |
-| **Tema** | Sorteado (único na turma) | **Praia & Caranguejos** (O Rei da Areia e sua colônia de crustáceos) |
-| **Tipo de Jogo** | Sorteado | **Chefe** (Sobreviver à horda de caranguejos e derrotar o Rei da Areia) |
-| **Modo** | Escolha do aluno | **Horda (Arena vista de cima, 4 direções, sem gravidade)** |
+| **Tema** | Sorteado (único na turma) | **Praia & Caranguejos** (Sobrevivência na areia contra a colônia de crustáceos) |
+| **Tipo de Jogo** | Sorteado | **Arena / Combate** (Sobreviver à horda de caranguejos e atingir 50 abates) |
+| **Modo** | Escolha do aluno | **Horda (Arena vista de cima, 4 direções, sem gravidade, resolução HD 1280×720)** |
 
 ---
 
 ## 🎮 2. Como Jogar
 
-O objetivo do jogador é defender a praia contra as ondas crescentes de caranguejos que emergem dos cantos da arena. Após sobreviver à investida inicial, o temível **Rei da Areia** (o Caranguejo Chefe) surge. Ao derrotá-lo, o jogador conquista a vitória! Se a vida do jogador chegar a zero, a partida é perdida.
+O objetivo do jogador é defender a praia contra as ondas crescentes de caranguejos que emergem dos quatro nascedouros da arena e atingir a meta de **50 caranguejos abatidos** para conquistar a vitória. O ataque do jogador acerta inimigos ao redor em **360°**. Se a vida do jogador chegar a zero, a partida é perdida.
 
 ### Controles
 | Ação | Teclas |
@@ -44,15 +45,15 @@ O projeto acompanha rigorosamente as entregas e marcos definidos no plano de ens
 | **10** | 28/10 | Inimigo com máquina de estados que contorna obstáculos via NavigationRegion2D/A* e clarão de ataque | `aula-10` |
 | **11** | 04/11 | Arte do tema no lugar dos retângulos, sistema de horda progressiva com spawners e otimização a 60 FPS | `aula-11` |
 | **12** | 11/11 | Jogo exportado, rodando fora da Godot, empacotamento .pck e página de apresentação publicada | `aula-12` |
-| **13** | 18/11 | Apresentação em sala de aula | `entrega-final` |
+| **13** | 18/11 | Apresentação em sala de aula e publicação no itch.io | `entrega-final` |
 
 ---
 
-## 📦 4. Execução do Jogo Exportado (Aula 12 - 11/11)
+## 📦 4. Execução do Jogo Exportado e Publicação
 
-Os pacotes de distribuição do jogo estão disponíveis no diretório `builds/`:
+- **Jogar no Navegador (itch.io):** [https://kaioguerreiro.itch.io/rei-da-areia](https://kaioguerreiro.itch.io/rei-da-areia)
+- **Web (export local):** `builds/web/index.html`, `builds/web/index.pck` e pacote `builds/web/index.zip`
 - **Windows:** `builds/windows/rei-da-areia.pck`
-- **Web:** `builds/web/rei-da-areia.pck`
 - **Página de Apresentação:** `docs/index.html`
 
 ### Como executar no Windows:
@@ -60,7 +61,7 @@ Os pacotes de distribuição do jogo estão disponíveis no diretório `builds/`
 godot --main-pack builds/windows/rei-da-areia.pck
 ```
 
-### Como executar os testes automatizados:
+### Como executar os testes de referência (aulas anteriores):
 ```bash
 # Testes de combate e vitória/derrota:
 godot --headless -s scripts/test_combat.gd
@@ -68,7 +69,7 @@ godot --headless -s scripts/test_combat.gd
 # Testes de navegação e A* (Aula 10):
 godot --headless -s scripts/test_navigation.gd
 
-# Testes da horda e chefe (Aula 11):
+# Testes da horda (Aula 11):
 godot --headless -s scripts/test_horde.gd
 ```
 
@@ -77,7 +78,7 @@ godot --headless -s scripts/test_horde.gd
 ## 🎨 5. Origem da Arte e Licenças (Regra 2)
 
 Todas as artes visuais utilizadas no projeto respeitam o uso educacional e livre:
-1. **Crab Sprite Sheet (Inimigos e Chefe):**
+1. **Crab Sprite Sheet (Inimigos):**
    - Autor: GrafxKid / Licença CC0 (Domínio Público).
    - Spritesheet com animações completas de Idle, Caminhada, Ataque, Dano e Morte.
 2. **Character Sheet 16x16 (Protagonista):**
@@ -91,6 +92,6 @@ Todas as artes visuais utilizadas no projeto respeitam o uso educacional e livre
 
 ## 💻 6. Citação de Origem do Código e IA (Regras 1 e 6)
 
-- **Engine:** [Godot Engine 4.7.1](https://godotengine.org/) (Licença MIT).
+- **Engine:** [Godot Engine 4.7.2](https://godotengine.org/) (Licença MIT).
 - **Roteiros de Prática:** Implementado com base nos roteiros de aula 08, 09 e 10 da disciplina de Jogos Digitais II (Prof. Ezéfferth C. A. Fernandes).
-- **Assistência de IA:** O desenvolvimento, estruturação dos testes automatizados e empacotamento contaram com apoio de inteligência artificial (assistente Antigravity / Gemini), conforme permitido e orientado na Seção 6 do documento de diretrizes do projeto.
+- **Assistência de IA:** O desenvolvimento, simplificação de scripts, estruturação dos testes automatizados e empacotamento contaram com apoio de inteligência artificial (assistente Antigravity / Gemini), conforme permitido e orientado na Seção 6 do documento de diretrizes do projeto.
